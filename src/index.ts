@@ -8,5 +8,5 @@ app.use(express.json())
 app.use(usersRoutes)
 
 app.listen(3000, () => {
-  console.log('Server is running')
+  console.log('🚀 Server is running')
 })

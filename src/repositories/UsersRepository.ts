@@ -1,5 +1,6 @@
 import { PrismaClient, Users } from '@prisma/client'
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
+import { IUpdateUserDTO } from '../dtos/IUpdateUserDTO'
 import { IUsersRepository } from './interfaces/IUsersRepository'
 
 const prisma = new PrismaClient()
@@ -42,5 +43,41 @@ export class UsersRepository implements IUsersRepository {
     const users = await this.prisma.users.findMany()
 
     return users
+  }
+
+  public async updateUser({
+    id,
+    name,
+    email,
+    password,
+  }: IUpdateUserDTO): Promise<Users> {
+    const users = await this.prisma.users.update({
+      where: { id },
+      data: {
+        name,
+        email,
+        password,
+      },
+    })
+
+    return users
+  }
+
+  public async findOneById(id: string): Promise<Users | null> {
+    const user = this.prisma.users.findFirst({
+      where: {
+        id,
+      },
+    })
+
+    return user
+  }
+
+  public async deleteUser(id: string) {
+    const user = await this.prisma.users.delete({
+      where: {
+        id,
+      },
+    })
   }
 }
