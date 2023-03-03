@@ -18,6 +18,7 @@ describe('get all users', () => {
       email: 'user1@email.com',
       password: 'teste123',
     })
+
     const user = await getUsers.execute()
 
     expect(user[0].name).toBe('user1')

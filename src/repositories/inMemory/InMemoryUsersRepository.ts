@@ -45,7 +45,20 @@ export class InMemoryUserRepository implements IUsersRepository {
       throw null
     }
 
-    return user
+    const updatedUser = {
+      id: user.id,
+      name: name ? name : undefined,
+      email: email ? email : undefined,
+      password: password ? password : undefined,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    } as Users
+
+    this.users.pop()
+
+    this.users.push(user)
+
+    return updatedUser
   }
 
   public async findOneById(id: string): Promise<Users | null> {
