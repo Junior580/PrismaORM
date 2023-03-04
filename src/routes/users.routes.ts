@@ -73,9 +73,9 @@ usersRoutes.delete(
 
       const userUpdate = new DeleteUserUseCase(usersRepository)
 
-      const user = await userUpdate.execute({ id })
+      const user = await userUpdate.execute(id)
 
-      return response.status(201).json({ message: 'user has deleted.', user })
+      return response.status(204).json({ message: 'user has deleted.', user })
     } catch (error) {
       if (error instanceof Error) {
         return response.status(400).json(error.message)

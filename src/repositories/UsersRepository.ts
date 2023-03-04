@@ -2,6 +2,7 @@ import { PrismaClient, Users } from '@prisma/client'
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
 import { IUpdateUserDTO } from '../dtos/IUpdateUserDTO'
 import { IUsersRepository } from './interfaces/IUsersRepository'
+import { v4 as uuid } from 'uuid'
 
 const prisma = new PrismaClient()
 
@@ -22,14 +23,13 @@ export class UsersRepository implements IUsersRepository {
   }
 
   public async create({
-    id,
     name,
     email,
     password,
   }: ICreateUserDTO): Promise<IUsers> {
     const user = await this.prisma.users.create({
       data: {
-        id,
+        id: uuid().toUpperCase(),
         name,
         email,
         password,

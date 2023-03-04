@@ -1,5 +1,4 @@
 import { Users } from '@prisma/client'
-import { v4 as uuid } from 'uuid'
 import { IUsersRepository } from '../repositories/interfaces/IUsersRepository'
 
 interface ICreateUserRequest {
@@ -25,7 +24,6 @@ export class CreateUserUseCase {
     }
 
     const createdUser = await this.usersRepository.create({
-      id: uuid().toUpperCase(),
       name,
       email,
       password,

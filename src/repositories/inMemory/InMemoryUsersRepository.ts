@@ -2,6 +2,7 @@ import { Users } from '@prisma/client'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO'
 import { IUsersRepository } from '../interfaces/IUsersRepository'
+import { v4 as uuid } from 'uuid'
 
 export class InMemoryUserRepository implements IUsersRepository {
   private users: Users[] = []
@@ -22,7 +23,7 @@ export class InMemoryUserRepository implements IUsersRepository {
     password,
   }: ICreateUserDTO): Promise<Users> {
     const user = {} as Users
-    Object.assign(user, { name, email, password })
+    Object.assign(user, { id: uuid().toUpperCase(), name, email, password })
 
     this.users.push(user)
 
@@ -40,6 +41,8 @@ export class InMemoryUserRepository implements IUsersRepository {
     password,
   }: IUpdateUserDTO): Promise<Users> {
     const user = this.users.find(user => user.id === id)
+
+    const userIndex = this.users.findIndex(user => user.id === id)
 
     if (!user) {
       throw null
@@ -68,6 +71,10 @@ export class InMemoryUserRepository implements IUsersRepository {
   }
 
   public async deleteUser(id: string): Promise<void> {
-    this.users.pop()
+    const userIndex = this.users.findIndex(user => user.id === id)
+
+    if (userIndex >= 0) {
+      this.users.splice(userIndex, 1)
+    }
   }
 }

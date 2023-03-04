@@ -13,7 +13,6 @@ describe('get all users', () => {
 
   it('should be able to get all users', async () => {
     await userRepo.create({
-      id: '123',
       name: 'user1',
       email: 'user1@email.com',
       password: 'teste123',
