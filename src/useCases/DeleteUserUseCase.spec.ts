@@ -1,4 +1,5 @@
 import { describe, expect, beforeEach, it } from 'vitest'
+import { AppError } from '../errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUsersRepository'
 import { DeleteUserUseCase } from './DeleteUserUseCase'
 
@@ -25,7 +26,7 @@ describe('delete user user', () => {
 
   it('should not able to delete non existing user', async () => {
     await expect(deleteUser.execute('nonExstingID')).rejects.toBeInstanceOf(
-      Error
+      AppError
     )
   })
 })

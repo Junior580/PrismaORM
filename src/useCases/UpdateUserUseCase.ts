@@ -1,4 +1,5 @@
 import { Users } from '@prisma/client'
+import { AppError } from '../errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUsersRepository'
 
 interface IUpdateUserRequest {
@@ -22,7 +23,7 @@ export class UpdateUserUseCase {
     const user = await this.usersRepository.findOneById(id)
 
     if (!user) {
-      throw new Error('User does not exists.')
+      throw new AppError('User does not exists.')
     }
 
     const usersUpdate = await this.usersRepository.updateUser({

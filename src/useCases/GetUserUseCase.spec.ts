@@ -1,4 +1,5 @@
 import { describe, expect, beforeEach, it } from 'vitest'
+import { AppError } from '../errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUsersRepository'
 import { GetUserUseCase } from './GetUserUseCase'
 
@@ -24,6 +25,6 @@ describe('get all users', () => {
   })
 
   it('should not able to get non existing user', async () => {
-    await expect(getUsers.execute()).rejects.toBeInstanceOf(Error)
+    await expect(getUsers.execute()).rejects.toBeInstanceOf(AppError)
   })
 })

@@ -1,4 +1,5 @@
 import { describe, expect, beforeEach, it } from 'vitest'
+import { AppError } from '../errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUsersRepository'
 import { UpdateUserUseCase } from './UpdateUserUseCase'
 
@@ -40,6 +41,6 @@ describe('update users data', () => {
         id: 'nonExistingID',
         name: 'user1',
       })
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

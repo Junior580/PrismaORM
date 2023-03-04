@@ -1,4 +1,5 @@
 import { describe, expect, beforeEach, it } from 'vitest'
+import { AppError } from '../errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUsersRepository'
 import { CreateUserUseCase } from './CreateUserUseCase'
 
@@ -33,6 +34,6 @@ describe('create user', () => {
         email: 'user1@email.com',
         password: 'teste123',
       })
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

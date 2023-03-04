@@ -1,4 +1,5 @@
 import { Users } from '@prisma/client'
+import { AppError } from '../errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUsersRepository'
 
 interface ICreateUserRequest {
@@ -20,7 +21,7 @@ export class CreateUserUseCase {
     const user = await this.usersRepository.findOneByEmail(email)
 
     if (user) {
-      throw new Error('User already exists.')
+      throw new AppError('User already exists.')
     }
 
     const createdUser = await this.usersRepository.create({

@@ -1,0 +1,7 @@
+{
+  "*.ts": [
+    "pnpm eslint 'src/**/*.ts' --fix",
+    "pnpm prettier --write 'src/**'",
+    "pnpm prettier --check 'src/**'"
+  ]
+}
