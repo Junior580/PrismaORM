@@ -12,6 +12,6 @@ export class DeleteUserController {
 
     const user = await userUpdate.execute(id)
 
-    return response.status(204).json({ message: 'user has deleted.', user })
+    return response.status(204).json({ message: 'user has deleted.' })
   }
 }

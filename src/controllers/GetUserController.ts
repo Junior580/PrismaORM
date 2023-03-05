@@ -6,8 +6,10 @@ export class GetUserController {
   public async handle(request: Request, response: Response) {
     const usersRepository = new UsersRepository()
 
-    const user = new GetUserUseCase(usersRepository)
+    const getUsers = new GetUserUseCase(usersRepository)
 
-    return response.status(201).json(user)
+    const users = await getUsers.execute()
+
+    return response.status(200).json(users)
   }
 }

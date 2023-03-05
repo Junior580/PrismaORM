@@ -26,6 +26,13 @@ export class UpdateUserUseCase {
       throw new AppError('User does not exists.')
     }
 
+    if (email) {
+      const emailExisting = await this.usersRepository.findOneByEmail(email)
+      if (emailExisting) {
+        throw new AppError('Email already exists.')
+      }
+    }
+
     const usersUpdate = await this.usersRepository.updateUser({
       id,
       name,
