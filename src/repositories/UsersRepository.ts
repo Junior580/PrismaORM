@@ -1,25 +1,25 @@
-import { PrismaClient, Users } from "@prisma/client";
-import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
-import { IUpdateUserDTO } from "../dtos/IUpdateUserDTO";
-import { IUsersRepository } from "./interfaces/IUsersRepository";
-import { v4 as uuid } from "uuid";
+import { PrismaClient, Users } from '@prisma/client'
+import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
+import { IUpdateUserDTO } from '../dtos/IUpdateUserDTO'
+import { IUsersRepository } from './interfaces/IUsersRepository'
+import { v4 as uuid } from 'uuid'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
-type IUsers = Users;
+type IUsers = Users
 
 export class UsersRepository implements IUsersRepository {
-  private prisma: PrismaClient;
+  private prisma: PrismaClient
   constructor() {
-    this.prisma = prisma;
+    this.prisma = prisma
   }
 
   public async findOneByEmail(email: string): Promise<IUsers | null> {
     const user = await this.prisma.users.findFirst({
       where: { email },
-    });
+    })
 
-    return user || null;
+    return user || null
   }
 
   public async create({
@@ -34,15 +34,15 @@ export class UsersRepository implements IUsersRepository {
         email,
         password,
       },
-    });
+    })
 
-    return user;
+    return user
   }
 
   public async findAll(): Promise<Users[]> {
-    const users = await this.prisma.users.findMany();
+    const users = await this.prisma.users.findMany()
 
-    return users;
+    return users
   }
 
   public async updateUser({
@@ -58,9 +58,9 @@ export class UsersRepository implements IUsersRepository {
         email,
         password,
       },
-    });
+    })
 
-    return users;
+    return users
   }
 
   public async findOneById(id: string): Promise<Users | null> {
@@ -68,9 +68,9 @@ export class UsersRepository implements IUsersRepository {
       where: {
         id,
       },
-    });
+    })
 
-    return user;
+    return user
   }
 
   public async deleteUser(id: string) {
@@ -78,6 +78,6 @@ export class UsersRepository implements IUsersRepository {
       where: {
         id,
       },
-    });
+    })
   }
 }
