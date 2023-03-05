@@ -13,8 +13,8 @@ datasource db {
 model Users {
   id        String @unique
   name      String
-  email     String  
-  password  String  
+  email     String
+  password  String
   updated_at DateTime @updatedAt
   created_at DateTime @default(now())
 }
