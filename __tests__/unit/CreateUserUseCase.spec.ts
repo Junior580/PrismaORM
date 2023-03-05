@@ -1,7 +1,7 @@
 import { describe, expect, beforeEach, it } from 'vitest'
-import { AppError } from '../errors/AppError'
-import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUsersRepository'
-import { CreateUserUseCase } from './CreateUserUseCase'
+import { AppError } from '../../src/errors/AppError'
+import { InMemoryUserRepository } from '../../src/repositories/inMemory/InMemoryUsersRepository'
+import { CreateUserUseCase } from '../../src/useCases/CreateUserUseCase'
 
 let userRepo: InMemoryUserRepository
 let createUser: CreateUserUseCase
